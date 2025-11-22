@@ -1,0 +1,863 @@
+
+<!DOCTYPE html>
+<html lang="en" class="h-full scroll-smooth">
+<head>
+    <style>
+  .chip  { display: inline-flex !important; width: auto !important; }
+</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nilesh Dongare · Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --cy-neon:#00ff99;   
+      --cy-neon-2:#00e6ff;
+      --neon:  var(--cy-neon);  
+      --neon2: var(--cy-neon-2);
+      color-scheme: dark;
+      --bg:#070a1a;
+      --g1:#06b6d4;  /* cyan */
+      --g2:#6366f1;  /* indigo */
+      --g3:#f472b6;  /* pink */
+    }
+    body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    /* Soft gradient glow */
+    body::before{
+      content:""; position:fixed; inset:-20%;
+      background:
+        radial-gradient(45% 35% at 20% 10%, color-mix(in srgb, var(--g1) 12%, transparent) 0%, transparent 60%),
+        radial-gradient(40% 30% at 80% 20%, color-mix(in srgb, var(--g2) 11%, transparent) 0%, transparent 60%),
+        radial-gradient(35% 40% at 50% 80%, color-mix(in srgb, var(--g3) 10%, transparent) 0%, transparent 60%);
+      filter: blur(36px); z-index:0; pointer-events:none;
+    }
+    .grad-text{background-image:linear-gradient(90deg,var(--g1),var(--g2),var(--g3)); -webkit-background-clip:text; background-clip:text; color:transparent;}
+    .chip{font-size:.75rem; line-height:1; padding:.4rem .55rem; border-radius:9999px; border:1px solid rgb(255 255 255 /.08)}
+    .active-link{color:#fff; font-weight:600}
+    /* Reveal */
+    .reveal{opacity:0; transform:translateY(12px); transition:opacity .5s ease, transform .5s ease}
+    .reveal.show{opacity:1; transform:none}
+    /* button*/
+    .cta-row{display:flex;gap:12px;flex-wrap:nowrap;align-items:center}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    padding:10px 16px;border-radius:10px;border:1px solid #362b30;
+    background:#111826;color:#e6e6e6;text-decoration:none;font-weight:600;
+  }
+  .btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.25)}
+
+  .cy-chip{
+    position:relative; display:inline-flex; align-items:center; justify-content:center;
+    padding:3px 5px; border-radius: 10px; gap:.5rem;
+    color:#e9faff; text-decoration:none; font-weight:600; letter-spacing:.1px;
+    background:
+      radial-gradient(120% 180% at 0% 0%, rgba(0,255,153,.10), transparent 55%),
+      radial-gradient(120% 180% at 100% 100%, rgba(0,230,255,.10), transparent 55%),
+      linear-gradient(180deg, rgba(15,20,34,.75), rgba(11,16,30,.75));
+    border:1px solid rgba(255,255,255,.14);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.06),
+      0 6px 18px rgba(0,0,0,.35);
+    backdrop-filter:saturate(120%) blur(6px);
+    -webkit-backdrop-filter:saturate(120%) blur(6px);
+    transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease, color .2s ease;
+    overflow:hidden;
+  }
+  .cy-chip::before{
+    content:""; position:absolute; inset:-2px; border-radius:inherit; z-index:-1; filter:blur(10px); opacity:0;
+    background:conic-gradient(from 180deg, var(--cy-neon,#00ff99), var(--cy-neon-2,#00e6ff), #7c4dff, var(--cy-neon,#00ff99));
+    transition:opacity .2s ease;
+  }
+  .cy-chip:hover{
+    transform:translateY(-1px);
+    border-color: color-mix(in srgb, var(--cy-neon,#00ff99) 40%, transparent);
+    box-shadow:
+      0 10px 26px rgba(0,0,0,.55),
+      0 0 22px color-mix(in srgb, var(--cy-neon,#00ff99) 25%, transparent);
+    color:#ffffff;
+  }
+  .cy-chip:hover::before{ opacity:.35; }
+  .cy-chip:active{ transform:translateY(0); box-shadow:0 6px 16px rgba(0,0,0,.45); }
+
+  </style>
+</head>
+<body class="bg-[var(--bg)] text-white/90 min-h-screen relative">
+
+  <!-- SHELL -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 relative z-10">
+    <div class="grid lg:grid-cols-[320px,1fr] gap-8">
+
+      <!-- LEFT SIDEBAR (fixed on lg) -->
+      <aside class="lg:sticky lg:top-8 self-start">
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <div class="flex items-center gap-4">
+            <!-- optional avatar circle -->
+            <div
+  class="relative w-14 h-14 grid place-items-center text-lg font-extrabold text-white
+         rounded-2xl border border-[rgba(0,255,170,.30)] ring-1 ring-white/10
+         shadow-[0_10px_24px_rgba(0,0,0,.45),0_0_28px_rgba(0,255,170,.22)]
+         bg-[linear-gradient(135deg,#0b0f1a_0%,#121a2b_100%),radial-gradient(120%_100%_at_0%_0%,rgba(0,255,153,.22)_0%,transparent_60%),radial-gradient(120%_100%_at_100%_100%,rgba(0,230,255,.20)_0%,transparent_60%)]
+         before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:opacity-60
+         before:bg-[repeating-linear-gradient(0deg,rgba(0,255,170,.08)_0_2px,transparent_2px_4px),repeating-linear-gradient(90deg,rgba(0,255,170,.06)_0_2px,transparent_2px_4px)]
+         before:mix-blend-overlay before:[filter:blur(.2px)]
+         after:content-[''] after:absolute after:inset-[-30%] after:rounded-2xl after:opacity-55
+         after:bg-[conic-gradient(from_180deg,rgba(0,255,153,0)_0%,rgba(0,255,153,.55)_12%,rgba(0,230,255,0)_25%,rgba(124,77,255,.45)_38%,rgba(0,255,153,0)_50%)]
+         after:blur-[14px] after:animate-spin">
+  N
+</div>
+
+            <div>
+              <h1 class="text-xl font-extrabold tracking-tight">Nilesh Dongare</h1>
+            </div>
+          </div>
+
+          <p class="mt-4 text-sm text-white/80">
+            I turn lab attacks into business-ready reports with retest evidence across Web, API, and Windows/AD. Open to: Penetration Testing · AppSec · Red Team 
+          </p>
+          
+          
+          <!-- Container makes buttons sit side-by-side -->
+<div style="display:flex;gap:12px;align-items:center;-ms-flex-align:wrap; margin-top: 10px;">
+
+  <!-- TryHackMe -->
+  <a href="https://tryhackme.com/p/hackcode24" target="_blank" rel="noopener"
+     style="display:inline-flex;align-items:center;justify-content:center;
+            padding:10px 20px;border-radius:14px;font-weight:800;letter-spacing:.2px;
+            text-decoration:none;color:#eaf7ff;
+            background:
+              radial-gradient(100% 140% at 10% -10%, rgba(0,230,255,.28) 0%, transparent 60%),
+              radial-gradient(100% 140% at 110% 120%, rgba(255,0,204,.24) 0%, transparent 60%),
+              linear-gradient(135deg,#0b0f1a 0%, #111827 100%);
+            border:1px solid rgba(160,220,255,.18);
+            box-shadow:0 8px 24px rgba(0,0,0,.45), 0 0 18px rgba(0,230,255,.28), inset 0 0 0 1px rgba(255,255,255,.06);
+            transition:all .2s ease;">
+    TryHackMe
+  </a>
+
+  <!-- Hack The Box -->
+  <a href=" https://app.hackthebox.com/profile/808498" target="_blank" rel="noopener"
+     style="display:inline-flex;align-items:center;justify-content:center;
+            padding:10px 20px;border-radius:14px;font-weight:800;letter-spacing:.2px;
+            text-decoration:none;color:#eaf7ff;
+            background:
+              radial-gradient(100% 140% at 10% -10%, rgba(0,255,153,.30) 0%, transparent 60%),
+              radial-gradient(100% 140% at 110% 120%, rgba(124,77,255,.24) 0%, transparent 60%),
+              linear-gradient(135deg,#0b0f1a 0%, #111827 100%);
+            border:1px solid rgba(160,220,255,.18);
+            box-shadow:0 8px 24px rgba(0,0,0,.45), 0 0 18px rgba(0,255,153,.30), inset 0 0 0 1px rgba(255,255,255,.06);
+            transition:all .2s ease;">
+    HackTheBox
+  </a>
+
+</div>
+            
+          <nav class="mt-6 space-y-1 text-sm" id="sideNav">
+            <a href="#about" class="block px-3 py-2 rounded-xl hover:bg-white/5">About</a>
+            <a href="#experience" class="block px-3 py-2 rounded-xl hover:bg-white/5">Experience</a>
+            <a href="#projects" class="block px-3 py-2 rounded-xl hover:bg-white/5">Projects</a>
+            <a href="#skills" class="block px-3 py-2 rounded-xl hover:bg-white/5">Skills</a>
+            <a href="#education" class="block px-3 py-2 rounded-xl hover:bg-white/5">Education</a>
+            <a href="#achievements" class="block px-3 py-2 rounded-xl hover:bg-white/5">Achievements</a>
+            <a href="#whyhire" class="block px-3 py-2 rounded-xl hover:bg-white/5">Why Hire Me</a>
+            <a href="#contact" class="block px-3 py-2 rounded-xl hover:bg-white/5">Contact</a>
+          </nav>
+
+            <div class="mt-6 flex gap-3 flex-nowrap whitespace-nowrap overflow-x-auto sm:overflow-visible pr-1 text-sm">
+            <a href="mailto:nileshdongare01@gmail.com" class="cy-chip">Email</a>
+            <a href="https://github.com/nileshdongare01" target="_blank" rel="noopener" class="cy-chip">GitHub</a>
+            <a href="https://www.linkedin.com/in/nilesh-dongare-7720a91b7/" target="_blank" rel="noopener" class="cy-chip">LinkedIn</a>
+            <a href="Nilesh_Dongare CV.pdf" download class="cy-chip">Resume</a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- RIGHT CONTENT -->
+      <main class="space-y-16 lg:space-y-24">
+
+        <!-- ABOUT -->
+        <section id="about" class="reveal">
+          <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight grad-text">About</h2>
+          
+          <div class="mt-6 grid md:grid-cols-3 gap-8 items-center">
+            <!-- Profile Photo -->
+            <div class="md:col-span-1 flex justify-center">
+              <img src="img 4.jpg" alt="Nilesh Dongare" 
+                   class="w-60 h-60 rounded-full ring-4 ring-sky-400/50 shadow-lg shadow-black/70 object-cover">
+            </div>
+            
+            <!-- About Text -->
+            <div class="md:col-span-2">
+              <p class="mt-3 text-white/80 max-w-3xl">
+                I am a <span class="text-white font-semibold"> Penetration Tester </span>and 
+                <span class="text-white font-semibold">MSc graduate in Applied Cyber Security (Queen’s University Belfast),</span>
+                with 4+ years of experience across IT operations, vulnerability analysis, and network security. In previous roles,
+                I supported and secured environments for <span class="text-white"> 800+ users/devices,</span> led estate-wide upgrades that 
+                improved stability and <span class="text-white"> reduced malware incidents ~30%, </span>
+                <span> and contributed to multi-site designs that achieved <span class="text-white">99.99% uptime.</span></span>
+                I am certified in <span class="text-white">CEH, EHE, DFI and ITIL V4 Foundation, </span>and I translate hands-on testing into clear, business-ready reports with remediation and retest evidence.
+              </p>
+              <p class="mt-4 text-white/80 max-w-3xl">
+                My strengths lie in <span class="text-white">web and API security, Windows/Active Directory attack paths, </span>and evidence-driven reporting. 
+                I am proficient with <span class="text-white">Burp Suite, Nmap, OWASP ZAP, Metasploit, ffuf/feroxbuster, sqlmap, nuclei, Wireshark/tshark, Nessus, 
+                impacket, BloodHound/SharpHound, evil-winrm, </span> and comfortable across <span class="text-white">Linux and Windows/AD </span> environments.
+                I follow OWASP WSTG and PTES to plan scope, execute tests, prioritize risk, and verify fixes.
+              </p>
+              <p class="mt-5 text-white/80 max-w-3xl">
+                Beyond industry experience, I am passionate about <span class="text-white">offensive security engineering</span>. 
+                from building safe home labs to automating recon and writing reproducible findings. 
+                Current interests include <span class="text-white"> access-control testing (IDOR), SSRF, auth/session hardening, 
+                AD privilege escalation & hardening, and purple-team validation </span> with Sysmon/Sigma. 
+                I value ethical testing, disciplined evidence handling, and plain-English communication so teams can find,
+                fix, and prove improvements quickly. (Actively pursuing eJPT, OSCP).
+              </p>
+            </div>
+          </div>
+        </section>
+        <!-- EXPERIENCE (timeline style) -->
+        <section id="experience" class="reveal">
+          <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight grad-text">Experience</h2>
+          <ol class="relative mt-6 border-s border-white/15">
+            <!-- item -->
+            <li class="ms-6 pb-10 last:pb-0">
+              <span class="absolute -start-2.5 mt-1.5 size-5 rounded-full bg-gradient-to-br from-[var(--g1)] to-[var(--g2)] ring-2 ring-[var(--bg)]"></span>
+              <div class="rounded-2xl p-5 border border-white/10 bg-white/5 hover:ring-2 hover:ring-[var(--g1)]/50 transition">
+                <div class="flex items-baseline gap-4">
+                  <h3 class="text-lg md:text-xl font-semibold flex-1 min-w-0 truncate">Research Project · Postgraduate Student</h3>
+                  <span class="text-xs text-white/70 shrink-0 whitespace-nowrap">May 2025 – Sep 2025 · QUB, united Kingdom</span>
+                </div>
+                <p class="mt-1 text-white/80">Nvidia</p>
+                <ul class="mt-3 space-y-2 text-white/80 list-disc ps-5">
+                  <li>Built a GPU-accelerated Layer-5 pre-filter that cuts deep-inspection load by 100–1000× while enforcing zero false negatives for SQLi/XSS.</li>
+                  <li>Architected end-to-end pipeline (NGINX TLS → Python/RAPIDS features → cuML/PyTorch inference → second-stage inspector) with Dockerized deployment.</li>
+                  <li>Benchmarked 5–10 Gb/s today and designed a clear path to ~50 Gb/s on NVIDIA L40s, with batching and multi-GPU scaling.</li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="ms-6 pb-10">
+              <span class="absolute -start-2.5 mt-1.5 size-5 rounded-full bg-gradient-to-br from-[var(--g2)] to-[var(--g3)] ring-2 ring-[var(--bg)]"></span>
+              <div class="rounded-2xl p-5 border border-white/10 bg-white/5 hover:ring-2 hover:ring-[var(--g2)]/50 transition">
+                <div class="flex items-baseline gap-4">
+                  <h3 class="text-lg md:text-xl font-semibold flex-1 min-w-0 truncate">Assistent Manager &nbsp;(Network Engineer)</h3>
+                  <span class="text-xs text-white/70 shrink-0 whitespace-nowrap">Jun 2023 – Aug 2024 · Pune, India</span>
+                </div>
+                <p class="mt-1 text-white/80">FEV India Pvt. Ltd.</p>
+                <ul class="mt-3 space-y-2 text-white/80 list-disc ps-5">
+                  <li>Supported 800+ users across offices and remote setups; owned daily network ops and troubleshooting for routers, switches, and access points to improve uptime.</li>
+                  <li>Administered Office 365 (email, Teams, OneDrive) and led software/system upgrades across 800+ devices, improving stability and reducing malware incidents.</li>
+                  <li>Delivered staff training on IT best practices, secure file storage, and email safety, cutting user-related incidents and strengthening cyber hygiene.</li>
+                </ul>
+                <a class="mt-4 inline-block text-sm text-cyan-300 hover:underline" target="_blank"
+                 href="FEV_Letter of Recommendation.pdf">
+                  View LOR
+                 </a>
+              </div>
+            </li>
+
+            <li class="ms-6 pb-10">
+              <span class="absolute -start-2.5 mt-1.5 size-5 rounded-full bg-gradient-to-br from-[var(--g3)] to-[var(--g1)] ring-2 ring-[var(--bg)]"></span>
+              <div class="rounded-2xl p-5 border border-white/10 bg-white/5 hover:ring-2 hover:ring-[var(--g3)]/50 transition">
+                <div class="flex items-baseline gap-4">
+                  <h3 class="text-lg md:text-xl font-semibold flex-1 min-w-0 truncate">Computer Hardware and Network Engineer</h3>
+                  <span class="text-xs text-white/70 shrink-0 whitespace-nowrap">Jan 2023 – Jun 2023 · Pune, India</span>
+                </div>
+                <p class="mt-1 text-white/80">Cybernetit Pvt. Ltd. </p>
+                <ul class="mt-3 space-y-2 text-white/80 list-disc ps-5">
+                  <li>Delivered client-site support, patch management and backup administration.</li>
+                  <li>Managed AD & O365 accounts, patching and endpoint security, cut malware incidents 30%.</li>
+                  <li>Supported Windows & Linux servers, ensuring business-critical availability.</li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="ms-6 pb-10">
+              <span class="absolute -start-2.5 mt-1.5 size-5 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-400 ring-2 ring-[var(--bg)]"></span>
+              <div class="rounded-2xl p-5 border border-white/10 bg-white/5 hover:ring-2 hover:ring-emerald-400/50 transition">
+                <div class="flex items-baseline gap-4">
+                  <h3 class="text-lg md:text-xl font-semibold flex-1 min-w-0 truncate">Cybersecurity Intern</h3>
+                  <span class="text-xs text-white/70 shrink-0 whitespace-nowrap">Mar 2022 – May 2022 · Pune, India</span>
+                </div>
+                <p class="mt-1 text-white/80">All India Council</p>
+                <ul class="mt-3 space-y-2 text-white/80 list-disc ps-5">
+                  <li>Conducting risk analysis on 15 simulated cyber threats, improving response time by 25%.</li>
+                  <li>Completing virtual labs in ethical hacking and penetration testing, resulting in a 20% increase in my technical proficiency.</li>
+                  <li>Engaging in mentorship sessions with industry experts, which enhanced my understanding of firewalls and intrusion detection systems (IDS).</li>
+                </ul>
+                 <a class="mt-4 inline-block text-sm text-cyan-300 hover:underline" target="_blank"
+                 href="CyberSecurity Internship.jpeg">
+                  View Certificate
+                 </a>
+              </div>
+            </li>
+
+            <li class="ms-4">
+              <span class="absolute -start-2.5 mt-1.5 size-5 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-400 ring-2 ring-[var(--bg)]"></span>
+              <div class="rounded-2xl p-5 border border-white/10 bg-white/5 hover:ring-2 hover:ring-emerald-400/50 transition">
+                <div class="flex items-baseline gap-2">
+                  <h3 class="text-lg md:text-xl font-semibold flex-1 min-w-0 truncate">Technical Support Engineer Intern</h3>
+                  <span class="text-xs text-white/70 shrink-0 whitespace-nowrap">Jun 2021 – Feb 2022 · Pune, India</span>
+                </div>
+                <p class="mt-1 text-white/80">DCC Infotech Pvt. Ltd.</p>
+                <ul class="mt-3 space-y-2 text-white/80 list-disc ps-5">
+                  <li>Provide on-site/remote support, resolving hardware, OS and network issues.</li>
+                  <li>Installed/configured servers, NAS and network devices, boosting data access 80%.</li>
+                  <li>Configure Cisco, HP, Sophos, Netgear and Ubiquiti etc. devices, improving uptime and performance.</li>
+                </ul>
+                <a class="mt-4 inline-block text-sm text-cyan-300 hover:underline" target="_blank"
+                 href="DCC Internship.pdf">
+                  View Certificate
+                 </a>
+              </div>
+            </li>
+          </ol>
+        </section>
+        <!-- PROJECTS -->
+<section id="projects" class="reveal">
+  <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight grad-text">Projects</h2>
+  <div class="mt-4 grid md:grid-cols-3 gap-4">
+    <!-- 1 -->
+    <article class="md:col-span-3 rounded-3xl p-4 md:p-5 border border-white/10 bg-white/10 transition hover:-translate-y-1 hover:shadow-xl ring-2 ring-transparent hover:ring-rose-400/80">
+      <h3 class="text-lg font-semibold">High Data Rate Realtime ML Network Anomaly Detection</h3>
+      <p class="mt-1 text-white/80">@NVIDIA / Queen's University Belfast</p>
+      <!-- chips -->
+<div class="mt-2 flex flex-wrap items-center gap-3">
+        <span class="chip !inline-flex !w-auto bg-emerald-500/10 text-emerald-300 border-emerald-400/20">Machine Learning</span>
+        <span class="chip !inline-flex !w-auto bg-sky-500/10 text-sky-300 border-sky-400/20">Python</span>
+        <span class="chip !inline-flex !w-auto bg-sky-500/10 text-sky-300 border-sky-400/20">Computer Networking</span>
+        <span class="chip !inline-flex !w-auto bg-emerald-500/10 text-emerald-300 border-emerald-400/20">Linux</span>
+        <span class="chip !inline-flex !w-auto bg-sky-500/10 text-sky-300 border-sky-400/20">Proxy Server</span>
+        <span class="chip !inline-flex !w-auto bg-emerald-500/10 text-emerald-300 border-emerald-400/20">GPU GPU-accelerated</span>
+      </div>
+      <p class="mt-3 text-white/80">
+        Architected and delivered a real-time, GPU-accelerated Layer-5 ML pre-filter for HTTP traffic: designed the
+        end-to-end pipeline (NGINX TLS termination → Python feature extraction → RAPIDS cuDF/cuML / optional PyTorch
+        inference → second-stage inspector), engineered lexical/structural features for SQLi/XSS, trained lightweight
+        classifiers (logistic regression, decision tree, random forest) tuned for zero false negatives, built a FastAPI
+        service with batching/metrics and Dockerized deployment, curated/augmented datasets and adversarial test cases,
+        instrumented benchmarking (throughput, latency, reduction ratio) achieving 5–10 Gb/s with a path to ~50 Gb/s on
+        NVIDIA L40s, and wrote documentation/diagrams for reproducible, production-ready operation.
+      </p>
+
+      <a class="mt-4 inline-block text-sm text-cyan-300 hover:underline" target="_blank"
+         href="https://github.com/nileshdongare01/High-Data-Rate-Realtime-ML-Network-Anomaly-Detection-">
+        Repository →
+      </a>
+    </article>
+
+    <article class="md:col-span-3 rounded-3xl p-4 md:p-5 border border-white/10 bg-white/10 transition hover:-translate-y-1 hover:shadow-xl ring-2 ring-transparent hover:ring-rose-400/80">
+      <h3 class="text-lg font-semibold">Infrastructure & Network Security Implementation</h3>
+      <p class="mt-1 text-white/80">@FEV Smart Mobility center</p>
+      <!-- chips -->
+<div class="mt-2 flex flex-wrap items-center gap-3">
+        <span class="chip !inline-flex !w-auto bg-emerald-500/10 text-emerald-300 border-emerald-400/20">Firewall</span>
+        <span class="chip !inline-flex !w-auto bg-sky-500/10 text-sky-300 border-sky-400/20">Switching</span>
+        <span class="chip !inline-flex !w-auto bg-sky-500/10 text-sky-300 border-sky-400/20">Routing</span>
+        <span class="chip !inline-flex !w-auto bg-emerald-500/10 text-emerald-300 border-emerald-400/20">End-point Security</span>
+        <span class="chip !inline-flex !w-auto bg-sky-500/10 text-sky-300 border-sky-400/20">Windows Server</span>
+        <span class="chip !inline-flex !w-auto bg-emerald-500/10 text-emerald-300 border-emerald-400/20">Windows/Linux</span>
+      </div>
+      <p class="mt-3 text-white/80">
+        Designed and deployed secure enterprise infrastructure using Cisco and Palo Alto solutions, achieving 99.99% uptime.
+        Implemented firewalls, VLANs, VPNs, and patch management, strengthening network security and reducing vulnerabilities by 30% across multi-site operations.
+      </p>
+    </article>
+  </div>
+</section>
+          </div>
+        </section>
+        <!-- SKILLS -->
+        <section id="skills" class="reveal mt-16">
+  <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight grad-text">Skills</h2>
+
+  <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+
+    <!-- Card 1 -->
+    <div class="rounded-3xl p-6 transition"
+         style="
+           position:relative; border-radius:24px; padding:24px;
+           background:
+             radial-gradient(120% 140% at 0% 0%, rgba(0,255,153,.08), transparent 60%),
+             radial-gradient(120% 140% at 100% 100%, rgba(0,230,255,.08), transparent 60%),
+             repeating-linear-gradient(0deg, transparent 0 22px, rgba(0,255,153,.05) 22px 23px),
+             repeating-linear-gradient(90deg, transparent 0 22px, rgba(0,255,153,.04) 22px 23px),
+             linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.03));
+           border:1px solid rgba(0,255,153,.18);
+           box-shadow:0 10px 26px rgba(0,0,0,.35);
+           backdrop-filter:saturate(120%) blur(8px); -webkit-backdrop-filter:saturate(120%) blur(8px);
+           transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+         "
+         onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 16px 42px rgba(0,0,0,.55)';this.style.borderColor='rgba(0,255,153,.32)'"
+         onmouseout="this.style.transform='';this.style.boxShadow='0 10px 26px rgba(0,0,0,.35)';this.style.borderColor='rgba(0,255,153,.18)'">
+      <!-- tiny neon corners -->
+      <span style="position:absolute;left:10px;top:10px;width:14px;height:14px;border-left:2px solid #00ff99;border-top:2px solid #00ff99;border-radius:3px"></span>
+      <span style="position:absolute;right:10px;top:10px;width:14px;height:14px;border-right:2px solid #00e6ff;border-top:2px solid #00e6ff;border-radius:3px"></span>
+      <span style="position:absolute;left:10px;bottom:10px;width:14px;height:14px;border-left:2px solid #00e6ff;border-bottom:2px solid #00e6ff;border-radius:3px"></span>
+      <span style="position:absolute;right:10px;bottom:10px;width:14px;height:14px;border-right:2px solid #00ff99;border-bottom:2px solid #00ff99;border-radius:3px"></span>
+
+      <h2 class="font-bold">OS & Cloud Technology</h2>
+      <p class="mt-3 text-white/80">Kali, Parrot, RedHat Linux (Administrator), Windows 10/11, Ubuntu, Windows Server 2k16, 2k19, AWS/Azure-AD</p>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="rounded-3xl p-6 transition"
+         style="
+           position:relative; border-radius:24px; padding:24px;
+           background:
+             radial-gradient(120% 140% at 0% 0%, rgba(99,102,241,.10), transparent 60%),
+             radial-gradient(120% 140% at 100% 100%, rgba(6,182,212,.08), transparent 60%),
+             repeating-linear-gradient(0deg, transparent 0 22px, rgba(99,102,241,.06) 22px 23px),
+             repeating-linear-gradient(90deg, transparent 0 22px, rgba(6,182,212,.05) 22px 23px),
+             linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.03));
+           border:1px solid rgba(99,102,241,.22);
+           box-shadow:0 10px 26px rgba(0,0,0,.35);
+           backdrop-filter:saturate(120%) blur(8px); -webkit-backdrop-filter:saturate(120%) blur(8px);
+           transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+         "
+         onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 16px 42px rgba(0,0,0,.55)';this.style.borderColor='rgba(99,102,241,.36)'"
+         onmouseout="this.style.transform='';this.style.boxShadow='0 10px 26px rgba(0,0,0,.35)';this.style.borderColor='rgba(99,102,241,.22)'">
+      <span style="position:absolute;left:10px;top:10px;width:14px;height:14px;border-left:2px solid #6366f1;border-top:2px solid #6366f1;border-radius:3px"></span>
+      <span style="position:absolute;right:10px;top:10px;width:14px;height:14px;border-right:2px solid #06b6d4;border-top:2px solid #06b6d4;border-radius:3px"></span>
+      <span style="position:absolute;left:10px;bottom:10px;width:14px;height:14px;border-left:2px solid #06b6d4;border-bottom:2px solid #06b6d4;border-radius:3px"></span>
+      <span style="position:absolute;right:10px;bottom:10px;width:14px;height:14px;border-right:2px solid #6366f1;border-bottom:2px solid #6366f1;border-radius:3px"></span>
+
+      <h2 class="font-bold">Tools & Platforms</h2>
+      <p class="mt-3 text-white/80">Metasploit, OWASP ZAP, Burp (Proxy/Repeater/Intruder), Wireshark/tshark, Nmap, Nessus, Nuclei, Netsparker, NetworkMiner, Nikto, MobSF, sqlmap, BeeF, Splunk, Kace, LanSwaper, Ticketing Tools (e.g. ServiceNow)</p>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="rounded-3xl p-6 transition"
+         style="
+           position:relative; border-radius:24px; padding:24px;
+           background:
+             radial-gradient(120% 140% at 0% 0%, rgba(0,230,255,.09), transparent 60%),
+             radial-gradient(120% 140% at 100% 100%, rgba(124,77,255,.08), transparent 60%),
+             repeating-linear-gradient(0deg, transparent 0 22px, rgba(0,230,255,.05) 22px 23px),
+             repeating-linear-gradient(90deg, transparent 0 22px, rgba(124,77,255,.05) 22px 23px),
+             linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.03));
+           border:1px solid rgba(0,230,255,.22);
+           box-shadow:0 10px 26px rgba(0,0,0,.35);
+           backdrop-filter:saturate(120%) blur(8px); -webkit-backdrop-filter:saturate(120%) blur(8px);
+           transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+         "
+         onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 16px 42px rgba(0,0,0,.55)';this.style.borderColor='rgba(0,230,255,.34)'"
+         onmouseout="this.style.transform='';this.style.boxShadow='0 10px 26px rgba(0,0,0,.35)';this.style.borderColor='rgba(0,230,255,.22)'">
+      <span style="position:absolute;left:10px;top:10px;width:14px;height:14px;border-left:2px solid #00e6ff;border-top:2px solid #00e6ff;border-radius:3px"></span>
+      <span style="position:absolute;right:10px;top:10px;width:14px;height:14px;border-right:2px solid #7c4dff;border-top:2px solid #7c4dff;border-radius:3px"></span>
+      <span style="position:absolute;left:10px;bottom:10px;width:14px;height:14px;border-left:2px solid #7c4dff;border-bottom:2px solid #7c4dff;border-radius:3px"></span>
+      <span style="position:absolute;right:10px;bottom:10px;width:14px;height:14px;border-right:2px solid #00e6ff;border-bottom:2px solid #00e6ff;border-radius:3px"></span>
+
+      <h2 class="font-bold">Network & Infrastructure</h2>
+      <p class="mt-3 text-white/80">Switch, Router and Routing Protocol, AP, Firewall, LAN, WAN, SD-WAN, VPN, VMware, Hyper-V, SCCM, Microsoft Intune, O365, OneDrive, SharePoint</p>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="rounded-3xl p-6 transition"
+         style="
+           position:relative; border-radius:24px; padding:24px;
+           background:
+             radial-gradient(120% 140% at 0% 0%, rgba(0,255,153,.09), transparent 60%),
+             radial-gradient(120% 140% at 100% 100%, rgba(6,182,212,.08), transparent 60%),
+             repeating-linear-gradient(0deg, transparent 0 22px, rgba(0,255,153,.05) 22px 23px),
+             repeating-linear-gradient(90deg, transparent 0 22px, rgba(6,182,212,.05) 22px 23px),
+             linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.03));
+           border:1px solid rgba(0,255,153,.20);
+           box-shadow:0 10px 26px rgba(0,0,0,.35);
+           backdrop-filter:saturate(120%) blur(8px); -webkit-backdrop-filter:saturate(120%) blur(8px);
+           transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+         "
+         onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 16px 42px rgba(0,0,0,.55)';this.style.borderColor='rgba(0,255,153,.32)'"
+         onmouseout="this.style.transform='';this.style.boxShadow='0 10px 26px rgba(0,0,0,.35)';this.style.borderColor='rgba(0,255,153,.20)'">
+      <span style="position:absolute;left:10px;top:10px;width:14px;height:14px;border-left:2px solid #00ff99;border-top:2px solid #00ff99;border-radius:3px"></span>
+      <span style="position:absolute;right:10px;top:10px;width:14px;height:14px;border-right:2px solid #06b6d4;border-top:2px solid #06b6d4;border-radius:3px"></span>
+      <span style="position:absolute;left:10px;bottom:10px;width:14px;height:14px;border-left:2px solid #06b6d4;border-bottom:2px solid #06b6d4;border-radius:3px"></span>
+      <span style="position:absolute;right:10px;bottom:10px;width:14px;height:14px;border-right:2px solid #00ff99;border-bottom:2px solid #00ff99;border-radius:3px"></span>
+
+      <h2 class="font-bold">Other Skills</h2>
+      <p class="mt-3 text-white/80">Penetration Testing, Web Application, Mobile Application, Vulnerability Assessment, Infrastructure Assessment, OWASP TOP 10, Data Recovery</p>
+    </div>
+
+  </div>
+</section>
+
+<br>
+       <!-- EDUCATION -->
+<section id="education" class="reveal">
+  <h2
+    class="text-3xl md:text-4xl font-extrabold tracking-tight"
+    style="background:linear-gradient(90deg,#22d3ee,#818cf8,#f472b6);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 10px rgba(129,140,248,.18);">
+    Education
+  </h2>
+
+  <div class="mt-4 grid md:grid-cols-2 gap-6">
+
+    <!-- Card 1 -->
+    <div
+      style="
+        position:relative; overflow:hidden; border-radius:22px; padding:24px;
+        background:
+          radial-gradient(120% 140% at 0% 0%, rgba(0,255,153,.10), transparent 60%),
+          radial-gradient(120% 140% at 100% 100%, rgba(0,230,255,.08), transparent 60%),
+          repeating-linear-gradient(0deg,transparent 0 22px, rgba(0,255,153,.05) 22px 23px),
+          repeating-linear-gradient(90deg,transparent 0 22px, rgba(0,230,255,.045) 22px 23px),
+          linear-gradient(180deg, rgba(11,17,32,.85), rgba(8,14,28,.9));
+        border:1px solid rgba(255,255,255,.10);
+        box-shadow:0 10px 26px rgba(0,0,0,.34);
+        backdrop-filter:saturate(120%) blur(10px); -webkit-backdrop-filter:saturate(120%) blur(10px);
+        transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      "
+      onmouseover="this.style.transform='translateY(-2px)';this.style.borderColor='rgba(0,255,153,.28)';this.style.boxShadow='0 18px 44px rgba(0,0,0,.55), 0 0 22px rgba(0,255,153,.18)';"
+      onmouseout="this.style.transform='';this.style.borderColor='rgba(255,255,255,.10)';this.style.boxShadow='0 10px 26px rgba(0,0,0,.34)';"
+    >
+      <!-- neon corner brackets -->
+      <span style="position:absolute;left:10px;top:10px;width:14px;height:14px;border-left:2px solid #00ff99;border-top:2px solid #00ff99;border-radius:3px;"></span>
+      <span style="position:absolute;right:10px;top:10px;width:14px;height:14px;border-right:2px solid #00e6ff;border-top:2px solid #00e6ff;border-radius:3px;"></span>
+      <span style="position:absolute;left:10px;bottom:10px;width:14px;height:14px;border-left:2px solid #00e6ff;border-bottom:2px solid #00e6ff;border-radius:3px;"></span>
+      <span style="position:absolute;right:10px;bottom:10px;width:14px;height:14px;border-right:2px solid #00ff99;border-bottom:2px solid #00ff99;border-radius:3px;"></span>
+
+      <h3 class="text-lg font-semibold">Queen's University Belfast</h3>
+      <p class="text-white/80">Master of Science in Applied Cyber Security — Commendation</p>
+      <p class="text-xs text-white/60 mt-1">Sep 2024 – Oct 2025 · Belfast, UK</p>
+    </div>
+
+    <!-- Card 2 -->
+    <div
+      style="
+        position:relative; overflow:hidden; border-radius:22px; padding:24px;
+        background:
+          radial-gradient(120% 140% at 0% 0%, rgba(0,255,153,.10), transparent 60%),
+          radial-gradient(120% 140% at 100% 100%, rgba(0,230,255,.08), transparent 60%),
+          repeating-linear-gradient(0deg,transparent 0 22px, rgba(0,255,153,.05) 22px 23px),
+          repeating-linear-gradient(90deg,transparent 0 22px, rgba(0,230,255,.045) 22px 23px),
+          linear-gradient(180deg, rgba(11,17,32,.85), rgba(8,14,28,.9));
+        border:1px solid rgba(255,255,255,.10);
+        box-shadow:0 10px 26px rgba(0,0,0,.34);
+        backdrop-filter:saturate(120%) blur(10px); -webkit-backdrop-filter:saturate(120%) blur(10px);
+        transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      "
+      onmouseover="this.style.transform='translateY(-2px)';this.style.borderColor='rgba(0,230,255,.28)';this.style.boxShadow='0 18px 44px rgba(0,0,0,.55), 0 0 22px rgba(0,230,255,.18)';"
+      onmouseout="this.style.transform='';this.style.borderColor='rgba(255,255,255,.10)';this.style.boxShadow='0 10px 26px rgba(0,0,0,.34)';"
+    >
+      <!-- neon corner brackets -->
+      <span style="position:absolute;left:10px;top:10px;width:14px;height:14px;border-left:2px solid #00ff99;border-top:2px solid #00ff99;border-radius:3px;"></span>
+      <span style="position:absolute;right:10px;top:10px;width:14px;height:14px;border-right:2px solid #00e6ff;border-top:2px solid #00e6ff;border-radius:3px;"></span>
+      <span style="position:absolute;left:10px;bottom:10px;width:14px;height:14px;border-left:2px solid #00e6ff;border-bottom:2px solid #00e6ff;border-radius:3px;"></span>
+      <span style="position:absolute;right:10px;bottom:10px;width:14px;height:14px;border-right:2px solid #00ff99;border-bottom:2px solid #00ff99;border-radius:3px;"></span>
+
+      <h3 class="text-lg font-semibold">Savitribai Phule Pune University</h3>
+      <p class="text-white/80">B.E. in Information Technology — First class with Distinction</p>
+      <p class="text-xs text-white/60 mt-1">Aug 2017 – Jul 2023 · Pune, India</p>
+    </div>
+
+  </div>
+</section>
+
+<br>
+        <!-- ACHIEVEMENTS -->
+        <section id="achievements" class="reveal">
+  <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight grad-text">Certifications & Achievements</h2>
+
+  <!-- scoped, tiny cyber styles -->
+  <style>
+    .cy-card{
+      position:relative;display:block;padding:18px;border-radius:16px;color:#eafff2;text-decoration:none;
+      background:
+        radial-gradient(120% 140% at 0% 0%,rgba(0,255,153,.12),transparent 60%),
+        radial-gradient(120% 140% at 100% 100%,rgba(0,230,255,.10),transparent 60%),
+        repeating-linear-gradient(0deg,transparent 0 23px,rgba(0,255,153,.06) 23px 24px),
+        repeating-linear-gradient(90deg,transparent 0 23px,rgba(0,255,153,.05) 23px 24px),
+        linear-gradient(180deg,rgba(7,10,26,.92),rgba(10,14,30,.92));
+      border:1px solid rgba(0,255,153,.22); box-shadow:0 8px 24px rgba(0,0,0,.45);
+      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease; overflow:hidden;
+    }
+    .cy-card::before{
+      content:"";position:absolute;inset:-6px;border-radius:20px;z-index:-1;filter:blur(10px);opacity:.32;
+      background:conic-gradient(from 180deg,#00ff99,#00e6ff,#7c4dff,#00ff99);
+      animation:spin 8s linear infinite;
+    }
+    .cy-card:hover{transform:translateY(-3px);border-color:rgba(0,255,153,.35);box-shadow:0 16px 40px rgba(0,0,0,.6),0 0 28px rgba(0,255,153,.28)}
+    .cy-corner{position:absolute;width:14px;height:14px;border-radius:3px}
+    .c-nw{left:8px;top:8px;border-left:2px solid #00ff99;border-top:2px solid #00ff99}
+    .c-ne{right:8px;top:8px;border-right:2px solid #00e6ff;border-top:2px solid #00e6ff}
+    .c-sw{left:8px;bottom:8px;border-left:2px solid #00e6ff;border-bottom:2px solid #00e6ff}
+    .c-se{right:8px;bottom:8px;border-right:2px solid #00ff99;border-bottom:2px solid #00ff99}
+    @keyframes spin{to{transform:rotate(1turn)}}
+  </style>
+
+  <!-- keep your responsive grid; no other layout changes -->
+  <ul class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-white/90">
+    <li><a class="cy-card" href="CTF-ECIT.pdf" target="_blank" rel="noopener">
+      <span class="cy-corner c-nw"></span><span class="cy-corner c-ne"></span><span class="cy-corner c-sw"></span><span class="cy-corner c-se"></span>
+      <div class="font-semibold text-white">Participate Certificate Of Capture The Flag {CTF} @ECIT</div>
+    </a></li>
+
+    <li><a class="cy-card" href="ITIL.pdf" target="_blank" rel="noopener">
+      <span class="cy-corner c-nw"></span><span class="cy-corner c-ne"></span><span class="cy-corner c-sw"></span><span class="cy-corner c-se"></span>
+      <div class="font-semibold text-white">ITIL V4 Foundation @PeopleCert</div>
+    </a></li>
+
+    <li><a class="cy-card" href="DFE.png" target="_blank" rel="noopener">
+      <span class="cy-corner c-nw"></span><span class="cy-corner c-ne"></span><span class="cy-corner c-sw"></span><span class="cy-corner c-se"></span>
+      <div class="font-semibold text-white">Digital Forensics Enssentials @EC-Council </div>
+    </a></li>
+
+    <li><a class="cy-card" href="EHE.png" target="_blank" rel="noopener">
+      <span class="cy-corner c-nw"></span><span class="cy-corner c-ne"></span><span class="cy-corner c-sw"></span><span class="cy-corner c-se"></span>
+      <div class="font-semibold text-white">Ethical Hacking Essentials @EC-Council</div>
+    </a></li>
+
+    <li><a class="cy-card" href="ECC-CEH-Certificate.pdf" target="_blank" rel="noopener">
+      <span class="cy-corner c-nw"></span><span class="cy-corner c-ne"></span><span class="cy-corner c-sw"></span><span class="cy-corner c-se"></span>
+      <div class="font-semibold text-white">Certified Ethical Hacker @EC-Council</div>
+    </a></li>
+
+    <li><a class="cy-card" href="Introduction of cyber security.pdf" target="_blank" rel="noopener">
+      <span class="cy-corner c-nw"></span><span class="cy-corner c-ne"></span><span class="cy-corner c-sw"></span><span class="cy-corner c-se"></span>
+      <div class="font-semibold text-white">Introduction of Cyber Security @Cybrary </div>
+    </a></li>
+
+
+    <li><a class="cy-card" href="Technical%20support%20fundamentals%20.pdf" target="_blank" rel="noopener">
+      <span class="cy-corner c-nw"></span><span class="cy-corner c-ne"></span><span class="cy-corner c-sw"></span><span class="cy-corner c-se"></span>
+      <div class="font-semibold text-white">Technical Support Fundamental @Google</div>
+    </a></li>
+
+    <li><a class="cy-card" href="Python%20basic.pdf" target="_blank" rel="noopener">
+      <span class="cy-corner c-nw"></span><span class="cy-corner c-ne"></span><span class="cy-corner c-sw"></span><span class="cy-corner c-se"></span>
+      <div class="font-semibold text-white">Python Programing Language @University of Michigan</div>
+    </a></li>
+  </ul>
+</section>
+
+<br> 
+        <section id="whyhire" class="reveal">
+  <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight grad-text">Why Hire Me</h2>
+
+  <div class="mt-4 grid md:grid-cols-2 gap-6">
+
+    <!-- Proven Industry Experience -->
+    <div class="rounded-3xl p-6 transition"
+         style="
+           position:relative;border-radius:24px;padding:24px;
+           background:
+             radial-gradient(120% 140% at 0% 0%, rgba(0,255,153,.10), transparent 60%),
+             radial-gradient(120% 140% at 100% 100%, rgba(0,230,255,.08), transparent 60%),
+             repeating-linear-gradient(0deg, transparent 0 22px, rgba(0,255,153,.05) 22px 23px),
+             repeating-linear-gradient(90deg, transparent 0 22px, rgba(0,255,153,.04) 22px 23px),
+             linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.03));
+           border:1px solid rgba(0,255,153,.22);
+           box-shadow:0 12px 28px rgba(0,0,0,.35);
+           backdrop-filter:saturate(120%) blur(8px);-webkit-backdrop-filter:saturate(120%) blur(8px);
+           transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+         "
+         onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 18px 46px rgba(0,0,0,.55)';this.style.borderColor='rgba(0,255,153,.34)'"
+         onmouseout="this.style.transform='';this.style.boxShadow='0 12px 28px rgba(0,0,0,.35)';this.style.borderColor='rgba(0,255,153,.22)'">
+      <!-- neon corners -->
+      <span style="position:absolute;left:10px;top:10px;width:14px;height:14px;border-left:2px solid #00ff99;border-top:2px solid #00ff99;border-radius:3px"></span>
+      <span style="position:absolute;right:10px;top:10px;width:14px;height:14px;border-right:2px solid #00e6ff;border-top:2px solid #00e6ff;border-radius:3px"></span>
+      <span style="position:absolute;left:10px;bottom:10px;width:14px;height:14px;border-left:2px solid #00e6ff;border-bottom:2px solid #00e6ff;border-radius:3px"></span>
+      <span style="position:absolute;right:10px;bottom:10px;width:14px;height:14px;border-right:2px solid #00ff99;border-bottom:2px solid #00ff99;border-radius:3px"></span>
+
+      <h3 class="text-lg font-semibold">Proven Industry Experience</h3>
+      <p class="mt-2 text-white/80">
+        I bring <span class="text-white"> 4+ years across IT operations, vulnerability analysis, and network security </span>, where I supported and secured environments for 800+ users/devices. 
+        I have delivered end-to-end, engagement-style assessment<span class="text-white"> scope → exploit → report → retest </span>that turned findings into fixes, led upgrades that reduced malware incidents by ~30%, 
+        and helped maintain 99.99% uptime across multi-site infrastructures. This mix of hands-on testing and operational ownership means I focus on risks that actually matter to the business.
+      </p>
+    </div>
+
+    <!-- Strong Technical Toolkit -->
+    <div class="rounded-3xl p-6 transition"
+         style="
+           position:relative;border-radius:24px;padding:24px;
+           background:
+             radial-gradient(120% 140% at 0% 0%, rgba(99,102,241,.12), transparent 60%),
+             radial-gradient(120% 140% at 100% 100%, rgba(6,182,212,.10), transparent 60%),
+             repeating-linear-gradient(0deg, transparent 0 22px, rgba(99,102,241,.06) 22px 23px),
+             repeating-linear-gradient(90deg, transparent 0 22px, rgba(6,182,212,.05) 22px 23px),
+             linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.03));
+           border:1px solid rgba(99,102,241,.22);
+           box-shadow:0 12px 28px rgba(0,0,0,.35);
+           backdrop-filter:saturate(120%) blur(8px);-webkit-backdrop-filter:saturate(120%) blur(8px);
+           transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+         "
+         onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 18px 46px rgba(0,0,0,.55)';this.style.borderColor='rgba(99,102,241,.36)'"
+         onmouseout="this.style.transform='';this.style.boxShadow='0 12px 28px rgba(0,0,0,.35)';this.style.borderColor='rgba(99,102,241,.22)'">
+      <span style="position:absolute;left:10px;top:10px;width:14px;height:14px;border-left:2px solid #6366f1;border-top:2px solid #6366f1;border-radius:3px"></span>
+      <span style="position:absolute;right:10px;top:10px;width:14px;height:14px;border-right:2px solid #06b6d4;border-top:2px solid #06b6d4;border-radius:3px"></span>
+      <span style="position:absolute;left:10px;bottom:10px;width:14px;height:14px;border-left:2px solid #06b6d4;border-bottom:2px solid #06b6d4;border-radius:3px"></span>
+      <span style="position:absolute;right:10px;bottom:10px;width:14px;height:14px;border-right:2px solid #6366f1;border-bottom:2px solid #6366f1;border-radius:3px"></span>
+
+      <h3 class="text-lg font-semibold">Strong Technical Toolkit</h3>
+      <p class="mt-2 text-white/80">
+        Hands-on capability across Web, API, and Windows/Active Directory assessments. 
+        Proficient with <span class="text-white">Burp Suite, OWASP ZAP, Nmap, ffuf/feroxbuster, nuclei, sqlmap, Metasploit, Wireshark/tshark, Nessus, MobSF, Nikto, impacket, BloodHound/SharpHound, evil-winrm, and core platforms (Windows, Linux, AD, O365) </span>. 
+        Work is guided by <span class="text-white">OWASP WSTG </span> and <span class="text-white">PTES </span>, with consistent CVSS-based risk ratings and reproducible PoCs to accelerate remediation.
+      </p>
+    </div>
+
+    <!-- Academic & Research Depth -->
+    <div class="rounded-3xl p-6 transition"
+         style="
+           position:relative;border-radius:24px;padding:24px;
+           background:
+             radial-gradient(120% 140% at 0% 0%, rgba(6,182,212,.10), transparent 60%),
+             radial-gradient(120% 140% at 100% 100%, rgba(124,77,255,.10), transparent 60%),
+             repeating-linear-gradient(0deg, transparent 0 22px, rgba(6,182,212,.06) 22px 23px),
+             repeating-linear-gradient(90deg, transparent 0 22px, rgba(124,77,255,.05) 22px 23px),
+             linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.03));
+           border:1px solid rgba(6,182,212,.22);
+           box-shadow:0 12px 28px rgba(0,0,0,.35);
+           backdrop-filter:saturate(120%) blur(8px);-webkit-backdrop-filter:saturate(120%) blur(8px);
+           transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+         "
+         onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 18px 46px rgba(0,0,0,.55)';this.style.borderColor='rgba(6,182,212,.34)'"
+         onmouseout="this.style.transform='';this.style.boxShadow='0 12px 28px rgba(0,0,0,.35)';this.style.borderColor='rgba(6,182,212,.22)'">
+      <span style="position:absolute;left:10px;top:10px;width:14px;height:14px;border-left:2px solid #06b6d4;border-top:2px solid #06b6d4;border-radius:3px"></span>
+      <span style="position:absolute;right:10px;top:10px;width:14px;height:14px;border-right:2px solid #7c4dff;border-top:2px solid #7c4dff;border-radius:3px"></span>
+      <span style="position:absolute;left:10px;bottom:10px;width:14px;height:14px;border-left:2px solid #7c4dff;border-bottom:2px solid #7c4dff;border-radius:3px"></span>
+      <span style="position:absolute;right:10px;bottom:10px;width:14px;height:14px;border-right:2px solid #06b6d4;border-bottom:2px solid #06b6d4;border-radius:3px"></span>
+
+      <h3 class="text-lg font-semibold">Academic & Research Depth</h3>
+      <p class="mt-2 text-white/80">
+        MSc in <span class="text-white">Applied Cyber Security </span>with industry certifications <span class="text-white">CEH, EHE, DFI, ITIL V4</span>and active progression towards <span class="text-white">eJPT, OSCP</span>.
+        Includes research-driven work such as an <span class="text-white">ML-based anomaly-detection prototype for SQLi/XSS pre-filtering</span>and an 
+        <span class="text-white">AD attack-path build-harden-retest </span> exercise, each documented with methodology, impact, and verification.
+      </p>
+    </div>
+
+    <!-- Passion for Innovation -->
+    <div class="rounded-3xl p-6 transition"
+         style="
+           position:relative;border-radius:24px;padding:24px;
+           background:
+             radial-gradient(120% 140% at 0% 0%, rgba(0,255,153,.10), transparent 60%),
+             radial-gradient(120% 140% at 100% 100%, rgba(124,77,255,.08), transparent 60%),
+             repeating-linear-gradient(0deg, transparent 0 22px, rgba(0,255,153,.05) 22px 23px),
+             repeating-linear-gradient(90deg, transparent 0 22px, rgba(124,77,255,.05) 22px 23px),
+             linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.03));
+           border:1px solid rgba(0,255,153,.22);
+           box-shadow:0 12px 28px rgba(0,0,0,.35);
+           backdrop-filter:saturate(120%) blur(8px);-webkit-backdrop-filter:saturate(120%) blur(8px);
+           transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+         "
+         onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 18px 46px rgba(0,0,0,.55)';this.style.borderColor='rgba(0,255,153,.34)'"
+         onmouseout="this.style.transform='';this.style.boxShadow='0 12px 28px rgba(0,0,0,.35)';this.style.borderColor='rgba(0,255,153,.22)'">
+      <span style="position:absolute;left:10px;top:10px;width:14px;height:14px;border-left:2px solid #00ff99;border-top:2px solid #00ff99;border-radius:3px"></span>
+      <span style="position:absolute;right:10px;top:10px;width:14px;height:14px;border-right:2px solid #7c4dff;border-top:2px solid #7c4dff;border-radius:3px"></span>
+      <span style="position:absolute;left:10px;bottom:10px;width:14px;height:14px;border-left:2px solid #7c4dff;border-bottom:2px solid #7c4dff;border-radius:3px"></span>
+      <span style="position:absolute;right:10px;bottom:10px;width:14px;height:14px;border-right:2px solid #00ff99;border-bottom:2px solid #00ff99;border-radius:3px"></span>
+
+      <h3 class="text-lg font-semibold">Passion for Innovation</h3>
+      <p class="mt-2 text-white/80">
+        Operates within defined scope and rules of engagement ; <span class="text-white"> emphasizes compliance, automation, and defensible evidence </span> so stakeholders can trust findings and confirm risk reduction quickly.
+        Communication includes executive-ready summaries with 30/60/90-day remediation plans and clear retest results ; 
+        extracurricular practice on platforms such as <span class="text-white">Hack The Box </span> and <span class="text-white">TryHackMe</span> reinforces practical skills.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+        
+<br>
+        <!-- CONTACT -->
+       <!-- CONTACT -->
+<section id="contact" class="reveal">
+  <h2 class="text-3xl md:text-4xl font-bold tracking-tight grad-text">Contact</h2>
+  <p class="mt-6 text-white/100">Email is the best way to contact me. I am seeking full-time roles in cybersecurity, particularly penetration testing and cybersecurity engineering.</p>
+
+  <!-- cyber chips row -->
+  <div style="margin-top:20px; display:flex; flex-wrap:wrap; gap:14px;">
+
+    <!-- Email -->
+    <a href="mailto:nileshdongare01@gmail.com"
+       style="display:inline-flex; align-items:center; gap:10px;
+              padding:12px 18px; border-radius:14px; font-weight:700;
+              color:#eafff6; text-decoration:none;
+              background:
+                radial-gradient(120% 140% at 0% 0%, rgba(0,255,153,.10), transparent 60%),
+                radial-gradient(120% 140% at 100% 100%, rgba(0,230,255,.10), transparent 60%),
+                linear-gradient(135deg, #0b0f1a 0%, #111827 100%);
+              border:1px solid rgba(0,255,153,.22);
+              box-shadow:0 8px 20px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.06);
+              transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;"
+       onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 14px 36px rgba(0,0,0,.6), 0 0 16px rgba(0,255,153,.35)'; this.style.borderColor='rgba(0,255,153,.45)';"
+       onmouseout="this.style.transform=''; this.style.boxShadow='0 8px 20px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.06)'; this.style.borderColor='rgba(0,255,153,.22)';">
+      nileshdongare01@gmail.com
+    </a>
+
+    <!-- LinkedIn -->
+    <a target="_blank" href="https://www.linkedin.com/in/nilesh-dongare-7720a91b7/"
+       style="display:inline-flex; align-items:center; gap:10px;
+              padding:12px 18px; border-radius:14px; font-weight:700;
+              color:#e7f1ff; text-decoration:none;
+              background:
+                radial-gradient(120% 140% at 0% 0%, rgba(99,102,241,.12), transparent 60%),
+                radial-gradient(120% 140% at 100% 100%, rgba(56,189,248,.10), transparent 60%),
+                linear-gradient(135deg, #0b0f1a 0%, #111827 100%);
+              border:1px solid rgba(99,102,241,.28);
+              box-shadow:0 8px 20px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.06);
+              transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;"
+       onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 14px 36px rgba(0,0,0,.6), 0 0 16px rgba(99,102,241,.40)'; this.style.borderColor='rgba(99,102,241,.45)';"
+       onmouseout="this.style.transform=''; this.style.boxShadow='0 8px 20px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.06)'; this.style.borderColor='rgba(99,102,241,.28)';">
+      LinkedIn
+    </a>
+
+    <!-- GitHub -->
+    <a target="_blank" href="https://github.com/nileshdongare01"
+       style="display:inline-flex; align-items:center; gap:10px;
+              padding:12px 18px; border-radius:14px; font-weight:700;
+              color:#e9fbff; text-decoration:none;
+              background:
+                radial-gradient(120% 140% at 0% 0%, rgba(0,255,204,.10), transparent 60%),
+                radial-gradient(120% 140% at 100% 100%, rgba(0,179,255,.10), transparent 60%),
+                linear-gradient(135deg, #0b0f1a 0%, #111827 100%);
+              border:1px solid rgba(0,179,255,.22);
+              box-shadow:0 8px 20px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.06);
+              transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;"
+       onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 14px 36px rgba(0,0,0,.6), 0 0 16px rgba(0,179,255,.35)'; this.style.borderColor='rgba(0,179,255,.45)';"
+       onmouseout="this.style.transform=''; this.style.boxShadow='0 8px 20px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.06)'; this.style.borderColor='rgba(0,179,255,.22)';">
+      GitHub
+    </a>
+
+  </div>
+</section>
+
+
+        <footer class="py-8 text-sm text-white/60">
+          © <span id="y"></span> Nilesh Dongare
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <!-- Scroll-spy + reveal -->
+  <script>
+    // year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // reveal on scroll
+    const rev = new IntersectionObserver((ents)=>{
+      ents.forEach(e => { if(e.isIntersecting){ e.target.classList.add('show'); rev.unobserve(e.target); }});
+    }, { threshold:.12 });
+    document.querySelectorAll('.reveal').forEach(el => rev.observe(el));
+
+    // scroll-spy
+    const links = [...document.querySelectorAll('#sideNav a')];
+    const sections = links.map(a => document.querySelector(a.getAttribute('href')));
+    const spy = new IntersectionObserver((ents)=>{
+      ents.forEach(ent => {
+        if(ent.isIntersecting){
+          const id = '#' + ent.target.id;
+          links.forEach(a => a.classList.toggle('active-link', a.getAttribute('href')===id));
+        }
+      });
+    }, { rootMargin: '-35% 0% -60% 0%', threshold: [.1]});
+    sections.forEach(s => s && spy.observe(s));
+    
+  </script>
+</body>
+</html>
